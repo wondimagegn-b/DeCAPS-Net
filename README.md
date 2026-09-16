@@ -132,9 +132,38 @@ Step-by-step walkthroughs of the commands above:
 
 ## Pretrained checkpoints
 
-Pretrained weights (ASDPose `best.pt` and GFBMD `fold1`–`fold5` `best.pt`) are on the
-[Releases](https://github.com/wondimagegn-b/DeCAPS-Net/releases) page. Use them with the
-`--phase test` commands above.
+Download the six checkpoints from the
+[Releases](https://github.com/wondimagegn-b/DeCAPS-Net/releases) page and place them as follows
+(create the folders if needed and rename each downloaded file to `best.pt`):
+
+```text
+work_dir/
+├── asdpose_skeleton/
+│   └── best.pt            <- asdpose_skeleton_best.pt
+└── gfbmd_fusion/
+    ├── fold1/best.pt      <- gfbmd_fusion_fold1_best.pt
+    ├── fold2/best.pt      <- gfbmd_fusion_fold2_best.pt
+    ├── fold3/best.pt      <- gfbmd_fusion_fold3_best.pt
+    ├── fold4/best.pt      <- gfbmd_fusion_fold4_best.pt
+    └── fold5/best.pt      <- gfbmd_fusion_fold5_best.pt
+```
+
+Then evaluate the pretrained models (requires the preprocessed data from the steps above):
+
+```bash
+# GFBMD: all 5 folds + CV summary
+python train_fusion.py --config configs/gfbmd_fusion.yaml --phase test
+python evaluate.py --dataset gfbmd \
+    --work-dir work_dir/gfbmd_fusion \
+    --out-dir work_dir/gfbmd_fusion/evaluation --num-folds 5
+
+# ASDPose
+python train_asdpose.py --config configs/asdpose_skeleton.yaml \
+    --phase test --weights work_dir/asdpose_skeleton/best.pt
+python evaluate.py --dataset asdpose \
+    --work-dir work_dir/asdpose_skeleton \
+    --out-dir work_dir/asdpose_skeleton/evaluation
+```
 
 ## Links
 
