@@ -139,7 +139,7 @@ Download the six checkpoints from the
 ```text
 work_dir/
 ├── asdpose_skeleton/
-│   └── best.pt            <- asdpose_skeleton_best.pt
+│   └── best.pt            <- asdpose_best.pt
 └── gfbmd_fusion/
     ├── fold1/best.pt      <- gfbmd_fusion_fold1_best.pt
     ├── fold2/best.pt      <- gfbmd_fusion_fold2_best.pt
