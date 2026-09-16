@@ -2,7 +2,6 @@
 
 Official code for **"Multimodal Human Parsing and Deformable Skeleton Fusion for Autism Spectrum Disorder Assessment"** (under review at *Pattern Recognition*).
 
-DeCAPS-Net combines colorized human-parsing maps (YOLOv8 + Sapiens) with a deformable skeleton stream (CAD-SGC + DeTGC) through bidirectional cross-attention for ASD assessment.
 
 ## Installation
 
@@ -47,7 +46,7 @@ data/
     └── folds_5_seed42.json
 ```
 
-## ASDPose (skeleton-only SMM recognition)
+## ASDPose
 
 ```bash
 # 1) Build the H5 from the raw pickle
@@ -66,7 +65,7 @@ python evaluate.py --dataset asdpose \
     --out-dir work_dir/asdpose_skeleton/evaluation
 ```
 
-## GFBMD (parsing + skeleton fusion, 5-fold subject-level CV)
+## GFBMD
 
 Replace `<gfbmd_root>` and `<sapiens_ckpt>` with your local paths.
 
@@ -123,10 +122,6 @@ python train_fusion.py --config configs/gfbmd_fusion.yaml \
     --phase test --fold 1 --weights work_dir/gfbmd_fusion/fold1/best.pt
 ```
 
-## Ablations
-
-Parsing-backbone ablation on GFBMD: set `parse_backbone_name` in `configs/gfbmd_fusion.yaml` to one of
-`resnet18` (default), `mobilenet_v3_small`, `efficientnet_b0`, `vgg16`, `vit_b_16`, then rerun training.
 
 ## Notebooks
 
